@@ -5,5 +5,9 @@ import com.example.DislinktXWSProject.model.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, Long> {
-
+	
+	User getByUsername(String username);
+	
+	
+	
 }

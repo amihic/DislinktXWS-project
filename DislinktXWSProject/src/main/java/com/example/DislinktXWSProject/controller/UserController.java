@@ -46,7 +46,18 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	//sacuvaj usera(ID I UNOSENJE POLJA iz body-ja)
+	@RequestMapping(value = "api/user",method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> save(@RequestBody User user){
+		User savedUser = this.userService.save(user);
+		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+	}
 	
-	
+	//update usera
+	@PutMapping(value = "api/user")
+	public ResponseEntity<User> update(@RequestBody User user){
+		User updatedUser = this.userService.updateUser(user);
+		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+	}
 	
 }
