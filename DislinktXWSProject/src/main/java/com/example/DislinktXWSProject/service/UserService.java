@@ -14,7 +14,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public User findById(Long id)
+	public User findById (Long id)
     {
         Optional<User> opt=this.userRepository.findById(id);
         if(!opt.isPresent()) {
@@ -22,6 +22,16 @@ public class UserService {
         }
         return opt.get();
     }
+	
+	public User getByUsername(String username) {
+		List<User> users = this.userRepository.findAll();
+		for(User u:users) {
+			if(username.equals(u.getUsername())) {
+				return u;
+			}			
+		}
+		return null;
+	}
 	
 	public User save(User user){
 

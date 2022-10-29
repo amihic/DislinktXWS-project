@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import com.example.DislinktXWSProject.service.UserService;
+import com.example.DislinktXWSProject.model.Profile;
 import com.example.DislinktXWSProject.model.User;
 import com.example.DislinktXWSProject.repository.UserRepository;
 
@@ -28,9 +29,16 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
+	//nadji profil po username-u
+	@RequestMapping(value="api/userN/{username}",method = RequestMethod.GET,produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<User> getByUsername(@PathVariable String username){
+		User user = this.userService.getByUsername(username);
+		return new ResponseEntity<>(user, HttpStatus.OK);			
+	}
+	
 	//pronadji sve usere
 	@RequestMapping(value="api/users",method = RequestMethod.GET, produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<User>> findAll(){
+	public ResponseEntity<List<User>> getAll(){
 		List<User> users = this.userRepository.findAll();
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
@@ -46,7 +54,7 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	//sacuvaj usera(ID I UNOSENJE POLJA iz body-ja)
+	//sacuvaj usera(ID I UNOSENJE POLJA iz body-ja - @RequestBody)
 	@RequestMapping(value = "api/user",method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> save(@RequestBody User user){
 		User savedUser = this.userService.save(user);
@@ -59,5 +67,7 @@ public class UserController {
 		User updatedUser = this.userService.updateUser(user);
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
+	
+	
 	
 }
