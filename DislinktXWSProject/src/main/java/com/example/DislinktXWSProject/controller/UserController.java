@@ -57,8 +57,8 @@ public class UserController {
 	//sacuvaj usera(ID I UNOSENJE POLJA iz body-ja - @RequestBody)
 	@RequestMapping(value = "api/user",method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> save(@RequestBody User user){
-		User savedUser = this.userService.save(user);
-		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+		User newUser = this.userService.save(user);
+		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 	}
 	
 	//update usera
