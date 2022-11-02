@@ -48,7 +48,7 @@ public class PostController {
 	}
 	
 	//brisanje posta 
-	
+	@RequestMapping(value = "api/post/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Post> delete(@PathVariable Long id){
 		Post post = this.postService.findById(id);
 		if(post == null) {
