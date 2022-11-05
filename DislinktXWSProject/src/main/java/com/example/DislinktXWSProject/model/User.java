@@ -1,14 +1,22 @@
 package com.example.DislinktXWSProject.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.example.DislinktXWSProject.model.Role;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
+@Document("users")
 public class User {
+	
+	//enum Rolee {USER, ADMIN};
+	
 	@Id
     private Long id;
     private String firstName;
@@ -17,12 +25,15 @@ public class User {
     private String username;
     private String password;
     private String dateOfBirth;
+    private boolean enabled;
+    private List<Role> roles;
+    private String roleType;
     
 	public User() {
 		
 	}
 	
-	public User(Long id, String firstName, String lastName, String email, String username, String password, String dateOfBirth) {
+	public User(Long id, String firstName, String lastName, String email, String username, String password, String dateOfBirth, boolean enabled, List<Role> roles, String roleType) {
 		
 		this.id = id;
 		this.firstName = firstName;
@@ -31,6 +42,10 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.dateOfBirth = dateOfBirth;
+		this.roles = roles;
+		this.enabled = enabled;
+		this.roleType = roleType;
+		
 	}
     
 	public Long getId() {
@@ -76,6 +91,33 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public boolean getEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(String roleType) {
+		this.roleType = roleType;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
     
     

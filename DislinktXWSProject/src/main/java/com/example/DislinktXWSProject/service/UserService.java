@@ -42,6 +42,7 @@ public class UserService {
         }
         id=id+1;
         user.setId(id);
+       
         return this.userRepository.save(user);
 
     }
@@ -56,6 +57,9 @@ public class UserService {
 		updatedUser.setDateOfBirth(user.getDateOfBirth());
 		updatedUser.setUsername(user.getUsername());
 		updatedUser.setPassword(user.getPassword());
+		updatedUser.setEnabled(user.getEnabled());
+		updatedUser.setRoles(user.getRoles());
+		updatedUser.setRoleType(user.getRoleType());
 		
 		return this.userRepository.save(updatedUser);
 		
