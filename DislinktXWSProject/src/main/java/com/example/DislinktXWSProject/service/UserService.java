@@ -2,6 +2,8 @@ package com.example.DislinktXWSProject.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.DislinktXWSProject.model.Post;
@@ -10,9 +12,17 @@ import com.example.DislinktXWSProject.repository.UserRepository;
 
 @Service
 public class UserService {
-
+	
 	@Autowired
 	private UserRepository userRepository;
+	
+	
+	private PasswordEncoder passwordEncoder; 
+	
+	public UserService() {
+		this.passwordEncoder = new BCryptPasswordEncoder();
+	}
+	
 	
 	public User findById (Long id)
     {
@@ -34,7 +44,18 @@ public class UserService {
 	}
 	
 	public User save(User user){
-
+		
+		List<User> users = this.userRepository.findAll();
+		for(User u:users) {
+			if(user.getUsername().equals(u.getUsername())) {
+				//System.out.printf("Username already exists!");
+				return null;
+			}
+		}
+		
+		String encodedPassword = this.passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		
         List<User> listOfAll = this.userRepository.findAll();
         Long id=(long)0;
         for ( User u:listOfAll) {
