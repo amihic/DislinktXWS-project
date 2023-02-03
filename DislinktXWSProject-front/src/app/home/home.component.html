@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .post {
+      border: 1px solid gray;
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+    .post img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    .post .text {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .post .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+    .post .actions button {
+      background-color: lightgray;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    
+  <div class="post" for="item of items">
+    <img src="https://via.placeholder.com/350x150" alt="Post Image">
+    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna in blandit convallis, sem leo commodo justo, id facilisis magna quam ac nunc.
+
+    </div>
+    <!--<template for="item of items">
+        <p>{{ item.name }}</p>
+      </template>-->
+    <div class="actions">
+      <button>Like</button>
+      <button>Comment</button>
+    </div>
+  </div>
+  
+</body>
+</html>
