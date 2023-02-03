@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.security.RolesAllowed;
+
 import com.example.authenticationService.model.User;
 import com.example.authenticationService.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +39,29 @@ public class UserController {
 
 
     @GetMapping("/user/all")
+    //@RolesAllowed("ADMIN")
     @PreAuthorize("hasRole('ADMIN')")
     public List<User> loadAll() {
         return this.userService.findAll();
     }
+    
+    @GetMapping("/user/all/a")
+    //@RolesAllowed("ADMIN")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<User> loadAlla() {
+        return this.userService.findAll();
+    }
+    
+    @GetMapping("/user/all/u")
+    //@RolesAllowed("ADMIN")
+    @PreAuthorize("hasRole('USER')")
+    public List<User> loadAllu() {
+        return this.userService.findAll();
+    }
 
     @GetMapping("/whoami")
-    @PreAuthorize("hasRole('USER')")
+    @RolesAllowed("ADMIN")
+    //@PreAuthorize("hasRole('ADMIN')")
     public User user(Principal user) {
         return this.userService.findByUsername(user.getName());
     }

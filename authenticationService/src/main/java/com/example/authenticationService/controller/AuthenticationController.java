@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -67,16 +68,19 @@ public class AuthenticationController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             User user = (User) authentication.getPrincipal();
-            String jwt = tokenUtils.generateToken(user.getUsername());
+            String jwt = tokenUtils.generateToken(user);
             int expiresIn = tokenUtils.getExpiredIn();
             authenticatedUserDTO = new AuthenticatedUserDTO(user.getId(), user.getRoleType(), user.getUsername(), new UserTokenState(jwt, expiresIn));
+            System.out.println("Ulogovan je " + authenticatedUserDTO.getUsername() + " i ima ulogu: "+ authenticatedUserDTO.getRole());
             return new ResponseEntity<>(authenticatedUserDTO, HttpStatus.OK);}
+        	
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
 
     // Endpoint za registraciju novog korisnika
     @PostMapping("/signup")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<User> addUser(@RequestBody UserRequest userRequest, UriComponentsBuilder ucBuilder) {
 
         User existUser = this.userService.findByUsername(userRequest.getUsername());

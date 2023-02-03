@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.example.DislinktXWSProject.service.UserService;
 import com.example.DislinktXWSProject.model.Profile;
 import com.example.DislinktXWSProject.model.User;
@@ -30,6 +32,7 @@ public class UserController {
 	}
 	
 	//nadji profil po username-u
+	//@PreAuthorize("hasRole('USER')")
 	@RequestMapping(value="api/userN/{username}",method = RequestMethod.GET,produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<User> getByUsername(@PathVariable String username){
 		User user = this.userService.getByUsername(username);
@@ -37,6 +40,7 @@ public class UserController {
 	}
 	
 	//pronadji sve usere
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value="api/users",method = RequestMethod.GET, produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<User>> getAll(){
 		List<User> users = this.userRepository.findAll();
@@ -62,6 +66,7 @@ public class UserController {
 	}
 	
 	//update usera
+	//@PreAuthorize("hasRole('User')")
 	@PutMapping(value = "api/user")
 	public ResponseEntity<User> update(@RequestBody User user){
 		User updatedUser = this.userService.updateUser(user);
