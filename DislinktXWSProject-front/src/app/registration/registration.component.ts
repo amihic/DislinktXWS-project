@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../model/user';
 import { AuthenticationService } from '../service/authentication.service';
+import { RegistrationService } from '../service/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -8,9 +10,47 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  newUser:User;
+  users:User[];
+
+
+  constructor(private registrationService:RegistrationService) {
+    this.newUser = new User
+      (
+        {
+          id: 1,
+          email: "",
+          username: "",
+          password:"",
+          firstName:"",
+          lastName: "",
+          dateOfBirth:""
+
+        }
+      );
+     this.users=[]; 
+
+   }
+
+
 
   ngOnInit(): void {
   }
 
+  reloadData()
+  {
+    this.registrationService.getUsers()
+    .subscribe(res => this.users=res);
+  }
+
+  registration()
+  {
+    console.log(this.newUser)
+    this.registrationService.registration(this.newUser)
+    .subscribe(_=>this.reloadData());
+  }
+  
+  verify(){
+    
+  }
 }
