@@ -1,7 +1,12 @@
 package com.example.authenticationService.dto;
 
+import java.util.List;
+
+import com.example.authenticationService.model.Role;
+
 public class AuthenticatedUserDTO {
     private Long id;
+    private List<Role> roles;
     private String role;
     private String username;
     private UserTokenState token;
@@ -11,13 +16,20 @@ public class AuthenticatedUserDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
-    public String getUsername() {
+    public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getUsername() {
         return username;
     }
     public void setUsername(String username) {
@@ -38,4 +50,12 @@ public class AuthenticatedUserDTO {
     }
 
     public AuthenticatedUserDTO() {}
+    
+	public AuthenticatedUserDTO(Long id, List<Role> roles, String username, UserTokenState token) {
+		super();
+        this.id = id;
+        this.roles = roles;
+        this.username = username;
+        this.token = token;
+	}
 }

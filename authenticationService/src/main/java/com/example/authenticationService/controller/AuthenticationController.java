@@ -1,6 +1,8 @@
 package com.example.authenticationService.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 
@@ -9,6 +11,7 @@ import com.example.authenticationService.dto.JwtAuthenticationRequest;
 import com.example.authenticationService.dto.UserRequest;
 import com.example.authenticationService.dto.UserTokenState;
 import com.example.authenticationService.exception.ResourceConflictException;
+import com.example.authenticationService.model.Role;
 import com.example.authenticationService.model.User;
 import com.example.authenticationService.service.UserService;
 import com.example.authenticationService.util.TokenUtils;
@@ -70,8 +73,9 @@ public class AuthenticationController {
             User user = (User) authentication.getPrincipal();
             String jwt = tokenUtils.generateToken(user);
             int expiresIn = tokenUtils.getExpiredIn();
-            authenticatedUserDTO = new AuthenticatedUserDTO(user.getId(), user.getRoleType(), user.getUsername(), new UserTokenState(jwt, expiresIn));
-            System.out.println("Ulogovan je " + authenticatedUserDTO.getUsername() + " i ima ulogu: "+ authenticatedUserDTO.getRole());
+            authenticatedUserDTO = new AuthenticatedUserDTO(user.getId(), user.getRoles(), user.getUsername(), new UserTokenState(jwt, expiresIn));
+           
+            System.out.println("Ulogovan je " + authenticatedUserDTO.getUsername() + " i ima ulogu: " + authenticatedUserDTO.getRoles().get(0).getName());
             return new ResponseEntity<>(authenticatedUserDTO, HttpStatus.OK);}
         	
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
