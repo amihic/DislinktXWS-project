@@ -29,7 +29,23 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    
+    if (this.username == '' || this.password == '')
+      this.error = "Email and password must be filled out";
+    else {
+      this.loginservice.authenticate(this.username, this.password).subscribe(
+        (data: any) => {
+          console.log(data)
+          this.LogIn.next();
+          this.idLoginUser = sessionStorage.getItem('id');
+          this.router.navigate(['home']);
+          this.invalidLogin = false
+        },
+        (error: { message: string | null; }) => {
+          this.invalidLogin = true
+          this.error = "Invalid username or password or your account is not active";
+
+        })
+    }
   }
 
 }

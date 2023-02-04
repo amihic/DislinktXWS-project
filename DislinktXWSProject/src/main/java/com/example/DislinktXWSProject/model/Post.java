@@ -20,7 +20,6 @@ public class Post {
 	private Long ownerId;
 	private String text;
 	private List<Long> userIdWhoLikes;
-	private List<Long> userIdWhoDislikes;
 	private List<Comment> comments;
 	private String picture;
 	private Long numberOfLikes;
@@ -30,13 +29,12 @@ public class Post {
 
 	}
 	
-	public Post(Long id, Long ownerId, String text, List<Long> userIdWhoLikes, List<Long> userIdWhoDislikes, List<Comment> comments, String picture, Long numberOfLikes) {
+	public Post(Long id, Long ownerId, String text, List<Long> userIdWhoLikes, List<Comment> comments, String picture, Long numberOfLikes) {
 
 		this.id = id;
 		this.ownerId = ownerId;
 		this.text = text;
 		this.userIdWhoLikes = userIdWhoLikes;
-		this.userIdWhoDislikes = userIdWhoDislikes;
 		this.comments = comments;
 		this.picture = picture;
 		this.numberOfLikes = numberOfLikes;
@@ -66,12 +64,7 @@ public class Post {
 	public void setUserIdWhoLikes(List<Long> userIdWhoLikes) {
 		this.userIdWhoLikes = userIdWhoLikes;
 	}
-	public List<Long> getUserIdWhoDislikes() {
-		return userIdWhoDislikes;
-	}
-	public void setUserIdWhoDislikes(List<Long> userIdWhoDislikes) {
-		this.userIdWhoDislikes = userIdWhoDislikes;
-	}
+
 	public String getPicture() {
 		return picture;
 	}

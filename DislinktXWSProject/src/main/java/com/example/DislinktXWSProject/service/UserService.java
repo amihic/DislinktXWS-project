@@ -1,4 +1,5 @@
 package com.example.DislinktXWSProject.service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.DislinktXWSProject.model.Post;
+import com.example.DislinktXWSProject.model.Role;
 import com.example.DislinktXWSProject.model.User;
 import com.example.DislinktXWSProject.repository.UserRepository;
+
 
 @Service
 public class UserService {
@@ -48,7 +51,7 @@ public class UserService {
 		List<User> users = this.userRepository.findAll();
 		for(User u:users) {
 			if(user.getUsername().equals(u.getUsername())) {
-				//System.out.printf("Username already exists!");
+				System.out.printf("Username already exists!");
 				return null;
 			}
 		}
@@ -63,7 +66,12 @@ public class UserService {
         }
         id=id+1;
         user.setId(id);
-       
+        List<Role> role = new ArrayList<>();
+        Role r = new Role((long) 1, "ROLE_USER");
+        role.add(r);
+        user.setRoles(role);
+        user.setEnabled(true);
+        System.out.println("User " + user.getUsername() + " uspesno registrovan");
         return this.userRepository.save(user);
 
     }

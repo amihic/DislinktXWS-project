@@ -9,8 +9,8 @@ import { User } from '../model/user';
 export class RegistrationService 
 {
   //url="http://localhost:8080/api/registration";
-  url="http://localhost:8082/auth/signup";
-  url1 = "http://localhost:8082/api/users";
+  url="http://localhost:8090/api/user";
+  url1 = "http://localhost:8090/api/users";
 
 
   constructor(private http:HttpClient) {}
