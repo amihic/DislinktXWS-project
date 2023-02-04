@@ -1,4 +1,5 @@
 package com.example.DislinktXWSProject.service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,22 @@ public class PostService {
             return null;
         }
         return post.get();
+	}
+
+
+	public List<Post> getAllPostsFromUser(String username) {
+		List<Post> posts = this.postRepository.findAll();
+		List<Post> userPosts = new ArrayList<Post>();
+		for(Post p:posts) {
+			if(username.equals(p.getOwner().getUsername())) {
+				userPosts.add(p);
+			}
+		}
+		if(userPosts.isEmpty()) {
+			System.out.println("User nema postove");
+			return null;
+		}
+		return userPosts;
 	}
 	
 	

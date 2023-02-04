@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Post } from '../model/post';
 import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  url="http://localhost:8090/api/userN/";
-
+  url="http://localhost:8090/api/userN";
+  url1="http://localhost:8090/api/posts";
   
   constructor(private http:HttpClient) { }
 
@@ -27,9 +28,14 @@ export class UserService {
   }
 */
   //Pronalazenje Korisnika Po Korisnickom Imenu
-  getByUsername(username:User):Observable<User>
+  getByUsername(userName:String)
   {
-    return this.http.get<User>(`${this.url}/${username}`)
+    return this.http.get<User>(`${this.url}/${userName}`);
+  }
+
+  getPostsByUsername(userName:String):Observable<Post[]>
+  {
+    return this.http.get<Post[]>(`${this.url1}/${userName}`)
   }
 /*
   UpdateUser(user:User):Observable<User>

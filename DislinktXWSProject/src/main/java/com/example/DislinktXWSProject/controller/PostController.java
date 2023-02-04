@@ -40,6 +40,13 @@ public class PostController {
 		return new ResponseEntity<>(posts, HttpStatus.OK);		
 	}
 	
+	@RequestMapping(value = "api/posts/{username}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<List<Post>> getAll(@PathVariable String username){
+		List<Post> posts = this.postService.getAllPostsFromUser(username);
+		return new ResponseEntity<>(posts, HttpStatus.OK);		
+	}
+	
+	
 	//nadji post po id
 	@RequestMapping(value = "api/post/{id}", method = RequestMethod.GET, produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Post> getById(@PathVariable Long id){

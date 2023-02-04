@@ -14,11 +14,12 @@
 <button class="btn btn-success" (click)="FindPublicAndPrivateProfile()">Search</button>
 -->
 <form>
-    <input type="text" placeholder="Search..." [(ngModel)]="user.username" required>
+    <input type="text" placeholder="Search..." [(ngModel)]="userName" [ngModelOptions]="{standalone: true}" required>
     <button type="submit" class="searchbtn" (click)="getProfileByUsername()">See profile</button>
   </form>
 
-<!--KAKO PRILIKOM UNOSA USERNAMEA I PRITISKOM NA DUGME DA SE POJAVI PROFIL SA POSTOVIMA-->
+
+  <!--KAKO PRILIKOM UNOSA USERNAMEA I PRITISKOM NA DUGME DA SE POJAVI PROFIL SA POSTOVIMA-->
                     <!--PROFILE-->
   <div class="profile-container">
     <div class="profile-header">{{user.firstName}} {{user.lastName}}</div>
@@ -33,19 +34,19 @@
       </div>
     </div>
     <div class="profile-details">
-      <div class="detail">First name:
+      <div class="detail">First name: {{user.firstName}}
           <!--<p>{{user.firstName}}</p>-->
       </div>
-      <div class="detail">Last name:
+      <div class="detail">Last name: {{user.lastName}}
           
       </div>
-      <div class="detail">Email:
+      <div class="detail">Email: {{user.email}}
           
       </div>
-      <div class="detail">Username:
+      <div class="detail">Username: {{user.username}}
           
       </div>
-      <div class="detail">Date of birth:
+      <div class="detail">Date of birth: {{user.dateOfBirth}}
           
       </div>
     </div>
@@ -67,4 +68,3 @@
       <button>Comment</button>
     </div>
   </div>
-  

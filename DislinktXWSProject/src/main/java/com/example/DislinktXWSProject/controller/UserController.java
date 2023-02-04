@@ -42,6 +42,7 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);			
 	}
 	
+	
 	//pronadji sve usere
 	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value="api/users",method = RequestMethod.GET, produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
