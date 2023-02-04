@@ -37,13 +37,8 @@ public class UserService {
     }
 	
 	public User getByUsername(String username) {
-		List<User> users = this.userRepository.findAll();
-		for(User u:users) {
-			if(username.equals(u.getUsername())) {
-				return u;
-			}			
-		}
-		return null;
+		User user = userRepository.getByUsername(username);
+        return  user;
 	}
 	
 	public User save(User user){

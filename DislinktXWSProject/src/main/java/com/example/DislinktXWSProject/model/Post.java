@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Post {
 	@Id
 	private Long id;
-	private Long ownerId;
+	private User owner;
 	private String text;
 	private List<Long> userIdWhoLikes;
 	private List<Comment> comments;
@@ -29,10 +29,10 @@ public class Post {
 
 	}
 	
-	public Post(Long id, Long ownerId, String text, List<Long> userIdWhoLikes, List<Comment> comments, String picture, Long numberOfLikes) {
+	public Post(Long id, User owner, String text, List<Long> userIdWhoLikes, List<Comment> comments, String picture, Long numberOfLikes) {
 
 		this.id = id;
-		this.ownerId = ownerId;
+		this.owner = owner;
 		this.text = text;
 		this.userIdWhoLikes = userIdWhoLikes;
 		this.comments = comments;
@@ -46,11 +46,11 @@ public class Post {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getOwnerId() {
-		return ownerId;
+	public User getOwnerId() {
+		return owner;
 	}
-	public void setOwnerId(Long ownerId) {
-		this.ownerId = ownerId;
+	public void setOwnerId(User owner) {
+		this.owner = owner;
 	}
 	public String getText() {
 		return text;

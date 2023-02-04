@@ -36,6 +36,9 @@ public class UserController {
 	@RequestMapping(value="api/userN/{username}",method = RequestMethod.GET,produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<User> getByUsername(@PathVariable String username){
 		User user = this.userService.getByUsername(username);
+		if(user==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<>(user, HttpStatus.OK);			
 	}
 	

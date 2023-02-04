@@ -22,6 +22,7 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     FindComponent,
     RegistrationComponent,
     LoginComponent
+    
   ],
   imports: [
     BrowserModule,

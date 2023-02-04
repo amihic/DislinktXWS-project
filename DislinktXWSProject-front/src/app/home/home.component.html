@@ -32,14 +32,17 @@
 </head>
 <body>
     
-  <div class="post" for="item of items">
+  <div class="post" *ngFor="let post of posts">
     <img src="https://via.placeholder.com/350x150" alt="Post Image">
-    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna in blandit convallis, sem leo commodo justo, id facilisis magna quam ac nunc.
+    <div class="text">
+      
+        <!--<p>OWNER : {{ post.owner.username }}</p>-->
+        <p>{{ post.text }}</p>
+        <p>{{ post.numberOfLikes }} LIKES</p>
 
     </div>
-    <!--<template for="item of items">
-        <p>{{ item.name }}</p>
-      </template>-->
+    
+    
     <div class="actions">
       <button>Like</button>
       <button>Comment</button>

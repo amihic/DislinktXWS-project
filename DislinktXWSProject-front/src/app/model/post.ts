@@ -1,8 +1,9 @@
 import { Comment } from "./comment";
+import { User } from "./user";
 
 interface PostInterface{
     id?:number;
-    ownerId:number;
+    owner:User;
     text:string;
     userIdWhoLikes:number[];
     userIdWhoDislikes:number[];
@@ -13,7 +14,7 @@ interface PostInterface{
 }
 export class Post implements PostInterface{
     id?:number;
-    ownerId:number;
+    owner:User;
     text:string;
     userIdWhoLikes:number[];
     userIdWhoDislikes:number[];
@@ -24,7 +25,7 @@ export class Post implements PostInterface{
 
     constructor(obj:PostInterface){
         this.id=obj.id;
-        this.ownerId=obj.ownerId;
+        this.owner=obj.owner;
         this.text=obj.text;
         this.userIdWhoLikes=obj.userIdWhoLikes;
         this.userIdWhoDislikes=obj.userIdWhoDislikes;

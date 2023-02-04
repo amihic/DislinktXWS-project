@@ -4,8 +4,6 @@
     <meta charset="utf-8"/>
 </head>
 
-
-<label for="username">Find Public Profile By Username :</label><br/>
 <!--
 <input name = "username" id = "username" type = "text" [(ngModel)] = "username"><br>
 <button class="btn btn-success" (click)="FindProfileByUsername()">Search</button>
@@ -15,37 +13,58 @@
 <input name = "username1" id = "username1" type = "text" [(ngModel)] = "username1"><br>
 <button class="btn btn-success" (click)="FindPublicAndPrivateProfile()">Search</button>
 -->
-<div>
-    <table class="table table-striped ">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-                <th>email</th>
-                <th>Date of Birth</th>
-                <th>Experience</th>
-                <th>Education</th>
-                <th>Interests</th>
-                <th>Skills</th>
-                <th>Private Profile</th>
-            </tr>
-        </thead>
-        <tbody >
-      <!--<tr  *ngFor="let profile of profiles"  >  
-                <td>{{profile.user.id}}</td>
-                <td>{{profile.user.firstName}}</td>
-                <td>{{profile.user.lastName}}</td>
-                <td>{{profile.user.username}}</td>
-                <td>{{profile.user.email}}</td>
-                <td>{{profile.user.dateOfBirth}}</td>
-                <td>{{profile.experience}}</td>
-                <td>{{profile.education}}</td>
-                <td>{{profile.interests}}</td>
-                <td>{{profile.skills}}</td>
-                <td>{{profile.privateProfile}}</td>
-     </tr>-->
-      </tbody>
-    </table>
+<form>
+    <input type="text" placeholder="Search..." [(ngModel)]="user.username" required>
+    <button type="submit" class="searchbtn" (click)="getProfileByUsername()">See profile</button>
+  </form>
+
+<!--KAKO PRILIKOM UNOSA USERNAMEA I PRITISKOM NA DUGME DA SE POJAVI PROFIL SA POSTOVIMA-->
+                    <!--PROFILE-->
+  <div class="profile-container">
+    <div class="profile-header">{{user.firstName}} {{user.lastName}}</div>
+    <div class="profile-info">
+      <div class="info-block">
+        <div class="info-header">Followers</div>
+        <div class="info-count">0</div>
+      </div>
+      <div class="info-block">
+        <div class="info-header">Followings</div>
+        <div class="info-count">0</div>
+      </div>
+    </div>
+    <div class="profile-details">
+      <div class="detail">First name:
+          <!--<p>{{user.firstName}}</p>-->
+      </div>
+      <div class="detail">Last name:
+          
+      </div>
+      <div class="detail">Email:
+          
+      </div>
+      <div class="detail">Username:
+          
+      </div>
+      <div class="detail">Date of birth:
+          
+      </div>
+    </div>
   </div>
+                    <!--POSTOVI-->
+  <div class="post" *ngFor="let post of posts">
+    <img src="https://via.placeholder.com/350x150" alt="Post Image">
+    <div class="text">
+      
+        <!--<p>OWNER : {{ post.owner.username }}</p>-->
+        <p>{{ post.text }}</p>
+        <p>{{ post.numberOfLikes }} LIKES</p>
+
+    </div>
+    
+    
+    <div class="actions">
+      <button>Like</button>
+      <button>Comment</button>
+    </div>
+  </div>
+  

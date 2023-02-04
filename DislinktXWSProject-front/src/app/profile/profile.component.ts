@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from '../model/post';
 import { User } from '../model/user';
 
 @Component({
@@ -9,9 +10,11 @@ import { User } from '../model/user';
 })
 export class ProfileComponent implements OnInit {
  
-  
 
-  constructor(private router: Router) { }
+
+  constructor(private router: Router) {
+    
+   }
 
   ngOnInit(): void 
   {
