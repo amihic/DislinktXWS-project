@@ -8,8 +8,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.DislinktXWSProject.model.Post;
+import com.example.DislinktXWSProject.model.Profile;
 import com.example.DislinktXWSProject.model.Role;
 import com.example.DislinktXWSProject.model.User;
+import com.example.DislinktXWSProject.repository.ProfileRepository;
 import com.example.DislinktXWSProject.repository.UserRepository;
 
 
@@ -19,6 +21,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private ProfileRepository profileRepository;
 	
 	private PasswordEncoder passwordEncoder; 
 	
@@ -67,6 +71,19 @@ public class UserService {
         user.setRoles(role);
         user.setEnabled(true);
         System.out.println("User " + user.getUsername() + " uspesno registrovan");
+        
+        Profile userProfile = new Profile();
+        userProfile.setId(user.getId());
+        userProfile.setUser(user);
+        userProfile.setExperience(null);
+        userProfile.setEducation(null);
+        userProfile.setInterests(null);
+        userProfile.setSkills(null);
+        userProfile.setPrivateProfile(false);
+        userProfile.setFollowers(null);
+        
+        this.profileRepository.save(userProfile);        
+        System.out.println("Useru " + user.getUsername() + " uspesno napravljen profil");
         return this.userRepository.save(user);
 
     }

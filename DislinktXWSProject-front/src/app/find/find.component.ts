@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../model/post';
+import { Profile } from '../model/profile';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 
@@ -9,6 +10,7 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./find.component.css']
 })
 export class FindComponent implements OnInit {
+
 
   users:User[];
   posts:Post[];
@@ -42,6 +44,10 @@ export class FindComponent implements OnInit {
     this.userService.getByUsername(this.userName)
     .subscribe((res: User) => this.user=res)
     
+  }
+
+  followRequest(){
+   
   }
 
   seeProfile(){}

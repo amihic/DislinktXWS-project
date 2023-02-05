@@ -1,7 +1,9 @@
 package com.example.authenticationService;
 
+import com.example.authenticationService.model.Profile;
 import com.example.authenticationService.model.Role;
 import com.example.authenticationService.model.User;
+import com.example.authenticationService.service.ProfileService;
 import com.example.authenticationService.service.RoleService;
 import com.example.authenticationService.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,9 @@ public class InsertData {
 
     private final UserService userService;
     private final RoleService roleService;
-
+    
+    @Autowired
+    private  ProfileService profileService;
 
     @Autowired
     public InsertData(RoleService roleService, UserService userService) {
@@ -46,11 +50,39 @@ public class InsertData {
         User u2 = new User((long) 2, "jova", "$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra", "Jova", "Jovic", "jovica@gmail.com", "20.08.1999", true, role2, "User");
         User u3 = new User((long) 3, "steva", "$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra", "Stevan", "Stefanovic", "steva@gmail.com", "20.08.1999",  true, role3, "User");
         User u4 = new User((long) 4, "mile", "$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra", "Mile", "Milic", "mile@gmail.com", "20.08.1999",  true, role3, "User");
-        u1.setRoles(role1);
 
         userService.saveUser(u1);
         userService.saveUser(u2);
         userService.saveUser(u3);
         userService.saveUser(u4);
+        
+        List<User> users1 = new ArrayList<User>();
+        List<User> users2 = new ArrayList<>();
+        List<User> users3 = new ArrayList<>();
+        List<User> users4 = new ArrayList<>();
+        
+        users1.add(u2);
+        users1.add(u3);
+        users1.add(u4);
+        
+        users2.add(u3);
+        users2.add(u4);
+        
+        users3.add(u1);
+        users3.add(u2);
+        
+        users4.add(u2);
+        users4.add(u3);
+        users4.add(u1);
+        
+        Profile p1 = new Profile((long) 1, u1, null,null,null,null,false, users1);
+        Profile p2 = new Profile((long) 2, u2, null,null,null,null,false, users2);
+        Profile p3 = new Profile((long) 3, u3, null,null,null,null,false, users3);
+        Profile p4 = new Profile((long) 4, u4, null,null,null,null,false, users4);
+        
+        profileService.save(p1);
+        profileService.save(p2);
+        profileService.save(p3);
+        profileService.save(p4);
     }
 }
