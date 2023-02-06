@@ -11,7 +11,11 @@ export class UserService {
   url="http://localhost:8090/api/userN";
   url1="http://localhost:8090/api/posts";
   
-  constructor(private http:HttpClient) { }
+  myId:any;
+
+  constructor(private http:HttpClient) {
+    this.myId= Number(sessionStorage.getItem('id'));
+   }
 
   save(newUser:User):Observable<User>{
     return this.http.post<User>(this.url,newUser);
@@ -35,7 +39,7 @@ export class UserService {
 
   getPostsByUsername(userName:String):Observable<Post[]>
   {
-    return this.http.get<Post[]>(`${this.url1}/${userName}`)
+    return this.http.get<Post[]>(`${this.url1}/${userName}/${this.myId}`)
   }
 /*
   UpdateUser(user:User):Observable<User>

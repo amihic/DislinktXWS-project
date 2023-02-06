@@ -48,14 +48,66 @@ public class PostService {
 	}
 
 
-	public Set<Post> getAllPostsFromUser(String username) {
+	public Set<Post> getAllPostsFromUser(String username, Long id) {
 		List<Profile> profiles = this.profileRepository.findAll(); 
+		Set<Profile> followings = new HashSet<>();
+		Profile myProfile = this.profileRepository.getById(id);
+		followings = myProfile.getFollowings();
 		Set<Post> userPosts = new HashSet<>();
-		for(Profile p : profiles) {
-			if(p.getUser().getUsername().equals(username)) {
-				userPosts = p.getPosts();
+		
+		for(Profile f:followings) {
+			if(f.getUser().getUsername().equals(username) ){
+				userPosts = f.getPosts();
+				return userPosts;
+			}			
+		}
+		for(Profile f:followings) {
+			if(!f.getUser().getUsername().equals(username) && f.isPrivateProfile() ){
+				return null;
+			}			
+		}
+		for(Profile p: profiles) {
+			if(p.getUser().getUsername().equals(username) && (!p.isPrivateProfile())){
+				userPosts = p.getPosts();	
+				return userPosts;
 			}
 		}
+		
+		
+
+		/*for(Profile ppp : profiles) {
+			for(Profile pp: followings)
+			if( ppp.getUser().getUsername().equals(username) && ppp.isPrivateProfile() && pp.getUser().getId().equals(username) ||
+					ppp.getUser().getUsername().equals(username) && !ppp.isPrivateProfile()) {
+					userPosts = ppp.getPosts();
+				
+			}
+		}*/
+		
+		
+		
+		/*for(Profile ppp : followings) {
+			if( ppp.getUser().getUsername().equals(username) && ppp.isPrivateProfile() || !ppp.isPrivateProfile()) {
+					userPosts = ppp.getPosts();
+				
+			}
+		}*/
+		
+		
+		/*for(Profile p : profiles) {
+			if(p.getUser().getUsername().equals(username)) {
+				if(p.isPrivateProfile()) {
+					for(Profile prof: followings) {
+						if(prof.getUser().getId().equals(p.getId())) {
+							userPosts = p.getPosts();
+						}
+					}
+				} 
+				if(!p.isPrivateProfile()) {
+					userPosts = p.getPosts();
+				}
+			}
+		}*/
 		
 		//userPosts = (Set<Post>) profile.getPosts();
 		
@@ -65,6 +117,16 @@ public class PostService {
 		}
 		return userPosts;
 	}
+	
+	/*List<Profile> profiles = this.profileRepository.findAll(); 
+	Set<Post> userPosts = new HashSet<>();
+	for(Profile p : profiles) {
+		if(p.getUser().getUsername().equals(username)) {
+			if(!p.isPrivateProfile()) {
+			userPosts = p.getPosts();
+			}
+		}
+	}*/
 
 
 	public Set<Post> findAllPostsFromUsersHeFollows(Long id) {

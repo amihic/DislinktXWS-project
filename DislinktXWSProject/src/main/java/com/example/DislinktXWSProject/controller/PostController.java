@@ -41,9 +41,9 @@ public class PostController {
 		return new ResponseEntity<>(posts, HttpStatus.OK);		
 	}
 	
-	@RequestMapping(value = "api/posts/{username}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Set<Post>> getAllPostsFromUser(@PathVariable String username){
-		Set<Post> posts = this.postService.getAllPostsFromUser(username);
+	@RequestMapping(value = "api/posts/{username}/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Set<Post>> getAllPostsFromUser(@PathVariable String username, @PathVariable Long id){
+		Set<Post> posts = this.postService.getAllPostsFromUser(username,id);
 		return new ResponseEntity<>(posts, HttpStatus.OK);		
 	}
 	

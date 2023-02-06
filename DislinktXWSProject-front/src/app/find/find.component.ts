@@ -42,13 +42,14 @@ export class FindComponent implements OnInit {
   }
 
   getProfileByUsername(){
+    this.myId = Number(sessionStorage.getItem('id'));
     this.userService.getPostsByUsername(this.userName)
     .subscribe((res: Post[]) => this.posts=res)
     this.userService.getByUsername(this.userName)
     .subscribe((res: User) => this.user=res);
 
     this.followedUsername = this.userName;
-    this.myId = Number(sessionStorage.getItem('id'));
+    
 
     console.log("Pokupljeni user: " + this.followedUsername);
     console.log("Ulogovani user: " + this.myId);
