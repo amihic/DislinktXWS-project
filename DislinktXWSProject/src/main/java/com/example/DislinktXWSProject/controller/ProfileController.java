@@ -48,6 +48,14 @@ public class ProfileController {
 		
 	}
 	
+	@PutMapping(value="api/follow/{username}/{id}")
+	public ResponseEntity<Profile> follow(@PathVariable String username, @PathVariable Long id){
+		Profile profile = this.profileService.follow(username, id);
+		return new ResponseEntity<>(profile, HttpStatus.OK);
+		
+	}
+	
+	
 	//izbrisi profil po id
 	@RequestMapping(value = "api/profile/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Profile> delete(@PathVariable Long id){

@@ -56,15 +56,9 @@ export class FindComponent implements OnInit {
     
     
   }
-/*
-  .subscribe((res: User) => {this.user=res;
-    this.followedUsername = this.userName});
-    console.log(this.followedUsername);
-    console.log("aaaa");
-*/
+
   followRequest(){
-   
+    this.myId = Number(sessionStorage.getItem('id'));
   }
 
-  seeProfile(){}
 }

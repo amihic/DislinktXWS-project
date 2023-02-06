@@ -1,6 +1,8 @@
 package com.example.DislinktXWSProject.service;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +59,52 @@ public class ProfileService {
 		updatedProfile.setEducation(profile.getEducation());
 		
 		return this.profileRepository.save(updatedProfile);
+	}
+	
+	public Profile addingFollower(String username, Long id) {
+		List<Profile> profiles = this.profileRepository.findAll();
+		Profile profileWhoFollows = this.profileRepository.getById(id);
+		Profile profileWhichIsFollowed = new Profile();
+		Set<Profile> followers = new HashSet<>();
+		for(Profile prof: profiles) {
+			if(prof.getUser().getUsername().equals(username)) {
+				profileWhichIsFollowed = prof;
+				followers = profileWhichIsFollowed.getFollowers();
+				followers.add(profileWhoFollows);
+				profileWhichIsFollowed.setFollowers(followers);
+				
+				System.out.println("User " + profileWhoFollows.getUser().getUsername() + " je dodat u followerse profila " + prof.getUser().getUsername());
+
+			}
+		}
+		return this.profileRepository.save(profileWhichIsFollowed);
+	}
+
+	public Profile follow(String username, Long id) {
+		List<Profile> profiles = this.profileRepository.findAll();
+		Profile profileWhoFollows = this.profileRepository.getById(id);
+		Set<Profile> followings = new HashSet<>();
+
+		followings = profileWhoFollows.getFollowings();
+		
+		for(Profile p : profiles) {
+			if(p.getUser().getUsername().equals(username)) {
+				followings.add(p);								
+				profileWhoFollows.setFollowings(followings);
+				System.out.println("User " + profileWhoFollows.getUser().getUsername() + " je zapratio usera " + p.getUser().getUsername());
+				
+				/*followers = p.getFollowers();
+				followers.add(profileWhoFollows);
+				p.setFollowers(followers);
+				this.profileRepository.save(p);
+				System.out.println("User " + profileWhoFollows.getUser().getUsername() + " je dodat u followerse profila " + p.getUser().getUsername());
+*/				addingFollower(username, id);
+				return this.profileRepository.save(profileWhoFollows);
+			}
+		}
+		
+		
+		return null;
 	}
 	
 }
