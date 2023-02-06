@@ -75,12 +75,14 @@ public class UserService {
         Profile userProfile = new Profile();
         userProfile.setId(user.getId());
         userProfile.setUser(user);
+        userProfile.setPosts(null);
         userProfile.setExperience(null);
         userProfile.setEducation(null);
         userProfile.setInterests(null);
         userProfile.setSkills(null);
         userProfile.setPrivateProfile(false);
         userProfile.setFollowers(null);
+        userProfile.setFollowings(null);
         
         this.profileRepository.save(userProfile);        
         System.out.println("Useru " + user.getUsername() + " uspesno napravljen profil");

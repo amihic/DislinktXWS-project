@@ -1,6 +1,8 @@
 package com.example.authenticationService.model;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,29 +20,33 @@ public class Profile {
 	@Id
 	private Long id;
     private User user;
+    private Set<Post> posts;
     private List<String> experience;
     private List<String> education;
     private List<String> interests;
     private List<String> skills;
     private boolean privateProfile;
-    private List<User> followers;
+    private Set<Profile> followers;
+    private Set<Profile> followings;
     
 	public Profile() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Profile(Long id, User user, List<String> experience, List<String> education, List<String> interests,
-			List<String> skills, boolean privateProfile, List<User> followers) {
+	public Profile(Long id, User user, Set<Post> posts, List<String> experience, List<String> education, List<String> interests,
+			List<String> skills, boolean privateProfile, Set<Profile> followers, Set<Profile> followings) {
 		super();
 		this.id = id;
 		this.user = user;
+		this.posts = posts;
 		this.experience = experience;
 		this.education = education;
 		this.interests = interests;
 		this.skills = skills;
 		this.privateProfile = privateProfile;
 		this.followers = followers;
+		this.followings = followings;
 	}
 
 	public Long getId() {
@@ -57,6 +63,14 @@ public class Profile {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public Set<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
 	}
 
 	public List<String> getExperience() {
@@ -99,12 +113,20 @@ public class Profile {
 		this.privateProfile = privateProfile;
 	}
 
-	public List<User> getFollowers() {
+	public Set<Profile> getFollowers() {
 		return followers;
 	}
 
-	public void setFollowers(List<User> followers) {
+	public void setFollowers(Set<Profile> followers) {
 		this.followers = followers;
+	}
+
+	public Set<Profile> getFollowings() {
+		return followings;
+	}
+
+	public void setFollowings(Set<Profile> followings) {
+		this.followings = followings;
 	}
     
     

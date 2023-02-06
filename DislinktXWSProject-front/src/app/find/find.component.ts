@@ -11,7 +11,8 @@ import { UserService } from '../service/user.service';
 })
 export class FindComponent implements OnInit {
 
-
+  followedUsername:String;
+  myId:any;
   users:User[];
   posts:Post[];
   user:User;
@@ -20,6 +21,8 @@ export class FindComponent implements OnInit {
     this.users=[];
     this.posts=[];
     this.userName = "";
+    this.myId = 0;
+    this.followedUsername = "";
     this.user = new User
       (
         {
@@ -42,10 +45,22 @@ export class FindComponent implements OnInit {
     this.userService.getPostsByUsername(this.userName)
     .subscribe((res: Post[]) => this.posts=res)
     this.userService.getByUsername(this.userName)
-    .subscribe((res: User) => this.user=res)
+    .subscribe((res: User) => this.user=res);
+
+    this.followedUsername = this.userName;
+    this.myId = Number(sessionStorage.getItem('id'));
+
+    console.log("Pokupljeni user: " + this.followedUsername);
+    console.log("Ulogovani user: " + this.myId);
+    
     
   }
-
+/*
+  .subscribe((res: User) => {this.user=res;
+    this.followedUsername = this.userName});
+    console.log(this.followedUsername);
+    console.log("aaaa");
+*/
   followRequest(){
    
   }

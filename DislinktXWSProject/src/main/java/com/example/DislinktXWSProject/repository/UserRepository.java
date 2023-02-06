@@ -7,7 +7,7 @@ import com.example.DislinktXWSProject.model.User;
 public interface UserRepository extends MongoRepository<User, Long> {
 	
 	User getByUsername(String username);
-	
+	User getById(Long id);
 	
 	
 }

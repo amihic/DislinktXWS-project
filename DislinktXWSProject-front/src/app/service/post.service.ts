@@ -8,12 +8,12 @@ import { Post } from '../model/post';
   providedIn: 'root'
 })
 export class PostService {
-  url="http://localhost:8090/api/posts";
+  url="http://localhost:8090/api/postsFromUserHeFollows";
 
   constructor(private http:HttpClient) {}
 
-  getPosts():Observable<Post[]>{
-    return this.http.get<Post[]>(this.url);
+  getPosts(id:Number):Observable<Post[]>{
+    return this.http.get<Post[]>(`${this.url}/${id}`);
   }
   
   /*save(newPost:Post):Observable<Post>{

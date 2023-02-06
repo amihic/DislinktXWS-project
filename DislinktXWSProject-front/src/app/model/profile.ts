@@ -9,7 +9,8 @@ interface ProfileInterface{
     interests:string[];
     skills:string[];
     privateProfile: boolean;
-    followers:User[];
+    followers:Profile[];
+    followings:Profile[];
     
 }
 export class Profile implements ProfileInterface{
@@ -20,7 +21,8 @@ export class Profile implements ProfileInterface{
     interests:string[];
     skills:string[];
     privateProfile: boolean;
-    followers:User[];
+    followers:Profile[];
+    followings:Profile[];
    
     constructor(obj:ProfileInterface){
         this.id=obj.id;
@@ -31,6 +33,7 @@ export class Profile implements ProfileInterface{
         this.skills=obj.skills;
         this.privateProfile=obj.privateProfile;
         this.followers=obj.followers;
+        this.followings=obj.followings;
         
     } 
 }

@@ -1,5 +1,6 @@
 package com.example.DislinktXWSProject.controller;
-import java.util.List;
+
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,15 +35,15 @@ public class PostController {
 	}
 	
 	//prikaz svih postova
-	@RequestMapping(value = "api/posts", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<Post>> getAll(){
-		List<Post> posts = this.postRepository.findAll();
+	@RequestMapping(value = "api/postsFromUserHeFollows/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Set<Post>> getAllPostsFromUsersHeFollows(@PathVariable Long id){
+		Set<Post> posts = this.postService.findAllPostsFromUsersHeFollows(id);
 		return new ResponseEntity<>(posts, HttpStatus.OK);		
 	}
 	
 	@RequestMapping(value = "api/posts/{username}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<Post>> getAll(@PathVariable String username){
-		List<Post> posts = this.postService.getAllPostsFromUser(username);
+	public ResponseEntity<Set<Post>> getAllPostsFromUser(@PathVariable String username){
+		Set<Post> posts = this.postService.getAllPostsFromUser(username);
 		return new ResponseEntity<>(posts, HttpStatus.OK);		
 	}
 	

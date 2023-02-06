@@ -7,4 +7,6 @@ import com.example.DislinktXWSProject.model.FollowRequest;
 @Repository
 public interface FollowRequestRepository extends MongoRepository<FollowRequest, Long> {
 
+	
+
 }

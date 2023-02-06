@@ -1,11 +1,10 @@
-package com.example.DislinktXWSProject.model;
+package com.example.authenticationService.model;
 
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.example.DislinktXWSProject.model.Comment;
 
 
 import lombok.Getter;
@@ -13,8 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
-@Document(collection = "posts")
+@Document("posts")
 public class Post {
 	@Id
 	private Long id;
@@ -110,3 +108,4 @@ public class Post {
 	
 		
 }
+
