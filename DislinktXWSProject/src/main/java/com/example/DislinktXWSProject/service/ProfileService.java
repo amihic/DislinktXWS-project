@@ -79,6 +79,25 @@ public class ProfileService {
 		}
 		return this.profileRepository.save(profileWhichIsFollowed);
 	}
+	
+	public boolean checkIfFollowing(String username, Long id) {
+		List<Profile> profiles = this.profileRepository.findAll();
+		Profile profileWhoFollows = this.profileRepository.getById(id);
+		Set<Profile> followings = new HashSet<>();
+		for(Profile p : profiles) {
+			if(p.getUser().getUsername().equals(username)) {
+				followings = p.getFollowings();
+			}
+		}
+		for(Profile prof : followings) {
+			if(prof.getUser().getUsername().equals(profileWhoFollows.getUser().getUsername())) {
+				return true;
+			}
+		}
+		return false;
+	}
+		
+		
 
 	public Profile follow(String username, Long id) {
 		List<Profile> profiles = this.profileRepository.findAll();
@@ -91,14 +110,14 @@ public class ProfileService {
 			if(p.getUser().getUsername().equals(username)) {
 				followings.add(p);								
 				profileWhoFollows.setFollowings(followings);
+				
+				if(checkIfFollowing(username, id)) {
+					System.out.println("User " + profileWhoFollows.getUser().getUsername() + " vec prati usera " + p.getUser().getUsername());
+					return null;
+				}
 				System.out.println("User " + profileWhoFollows.getUser().getUsername() + " je zapratio usera " + p.getUser().getUsername());
 				
-				/*followers = p.getFollowers();
-				followers.add(profileWhoFollows);
-				p.setFollowers(followers);
-				this.profileRepository.save(p);
-				System.out.println("User " + profileWhoFollows.getUser().getUsername() + " je dodat u followerse profila " + p.getUser().getUsername());
-*/				addingFollower(username, id);
+				addingFollower(username, id);
 				return this.profileRepository.save(profileWhoFollows);
 			}
 		}
