@@ -1,6 +1,5 @@
 package com.example.authenticationService.model;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +20,7 @@ public class Profile {
 	private Long id;
     private User user;
     private Set<Post> posts;
+    private Set<FollowRequest> followRequests;
     private List<String> experience;
     private List<String> education;
     private List<String> interests;
@@ -34,12 +34,13 @@ public class Profile {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Profile(Long id, User user, Set<Post> posts, List<String> experience, List<String> education, List<String> interests,
+	public Profile(Long id, User user, Set<Post> posts, Set<FollowRequest> followRequests, List<String> experience, List<String> education, List<String> interests,
 			List<String> skills, boolean privateProfile, Set<Profile> followers, Set<Profile> followings) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.posts = posts;
+		this.followRequests = followRequests;
 		this.experience = experience;
 		this.education = education;
 		this.interests = interests;
@@ -71,6 +72,14 @@ public class Profile {
 
 	public void setPosts(Set<Post> posts) {
 		this.posts = posts;
+	}
+
+	public Set<FollowRequest> getFollowRequests() {
+		return followRequests;
+	}
+
+	public void setFollowRequests(Set<FollowRequest> followRequests) {
+		this.followRequests = followRequests;
 	}
 
 	public List<String> getExperience() {

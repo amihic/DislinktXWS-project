@@ -1,18 +1,14 @@
-package com.example.DislinktXWSProject.model;
+package com.example.authenticationService.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
-
-@Document(collection = "followRequests")
+@Document("followRequests")
 public class FollowRequest {
 	@Id
     private Long id;

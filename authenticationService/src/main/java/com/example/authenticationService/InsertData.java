@@ -102,10 +102,10 @@ public class InsertData {
         posts4.add(post7);
         
         
-        Profile p1 = new Profile((long) 1, u1, posts1, null,null,null,null,false, null, null);
-        Profile p2 = new Profile((long) 2, u2, posts2, null,null,null,null,false, null, null);
-        Profile p3 = new Profile((long) 3, u3, posts3, null,null,null,null,false, null, null);
-        Profile p4 = new Profile((long) 4, u4, posts4, null,null,null,null,false, null, null);
+        Profile p1 = new Profile((long) 1, u1, posts1, null, null,null,null,null,false, null, null);
+        Profile p2 = new Profile((long) 2, u2, posts2, null, null,null,null,null,false, null, null);
+        Profile p3 = new Profile((long) 3, u3, posts3, null, null,null,null,null,false, null, null);
+        Profile p4 = new Profile((long) 4, u4, posts4, null, null,null,null,null,false, null, null);
         
        /* profileService.save(p1);
         profileService.save(p2);
@@ -150,20 +150,12 @@ public class InsertData {
         followings4.add(p1);
         followings4.add(p2);
         
-        /*p1.setFollowers(followers1);
-        p2.setFollowers(followers2);
-        p3.setFollowers(followers3);
-        p4.setFollowers(followers4);
         
-        p1.setFollowings(followings1);
-        p2.setFollowings(followings2);
-        p3.setFollowings(followings3);
-        p4.setFollowings(followings4);*/
         
-        Profile pp1 = new Profile((long) 1, u1, posts1, null,null,null,null,true, followers1, followings1);
-        Profile pp2 = new Profile((long) 2, u2, posts2, null,null,null,null,false, followers2, followings2);
-        Profile pp3 = new Profile((long) 3, u3, posts3, null,null,null,null,true, followers3, followings3);
-        Profile pp4 = new Profile((long) 4, u4, posts4, null,null,null,null,false, followers4, followings4);
+        Profile pp1 = new Profile((long) 1, u1, posts1, null, null,null,null,null,true, followers1, followings1);
+        Profile pp2 = new Profile((long) 2, u2, posts2, null, null,null,null,null,false, followers2, followings2);
+        Profile pp3 = new Profile((long) 3, u3, posts3, null, null,null,null,null,true, followers3, followings3);
+        Profile pp4 = new Profile((long) 4, u4, posts4, null, null,null,null,null,false, followers4, followings4);
      
         profileService.save(pp1);
         profileService.save(pp2);
