@@ -1,9 +1,11 @@
 package com.example.authenticationService;
 
+import com.example.authenticationService.model.FollowRequest;
 import com.example.authenticationService.model.Post;
 import com.example.authenticationService.model.Profile;
 import com.example.authenticationService.model.Role;
 import com.example.authenticationService.model.User;
+import com.example.authenticationService.service.FollowRequestService;
 import com.example.authenticationService.service.PostService;
 import com.example.authenticationService.service.ProfileService;
 import com.example.authenticationService.service.RoleService;
@@ -29,6 +31,8 @@ public class InsertData {
     private  ProfileService profileService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private FollowRequestService followRequestService;
 
     @Autowired
     public InsertData(RoleService roleService, UserService userService) {
@@ -59,11 +63,13 @@ public class InsertData {
         User u3 = new User((long) 3, "steva", "$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra", "Stevan", "Stefanovic", "steva@gmail.com", "20.08.1999",  true, role3, "User");
         User u4 = new User((long) 4, "mile", "$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra", "Mile", "Milic", "mile@gmail.com", "20.08.1999",  true, role3, "User");
 
+        User u1000 = new User((long) 100000, "dsasdad", "$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra", "dsadsa", "dsadsa", "dsasad@dsasda.com", "20.08.1999",  true, role3, "User");
+
         userService.saveUser(u1);
         userService.saveUser(u2);
         userService.saveUser(u3);
         userService.saveUser(u4);
-        
+        userService.saveUser(u1000);
         
         
         Post post1 = new Post((long) 1, u2, "pisem pisem", null, null, null, null, (long)  0,(long)  0);
@@ -150,12 +156,29 @@ public class InsertData {
         followings4.add(p1);
         followings4.add(p2);
         
+        Set<FollowRequest> fr1 = new HashSet<>();
+        Set<FollowRequest> fr2 = new HashSet<>();
+        Set<FollowRequest> fr3 = new HashSet<>();
+        Set<FollowRequest> fr4 = new HashSet<>();
         
+        FollowRequest followRequest = new FollowRequest();
+        Profile p1000 = new Profile((long) 1000000, u1000, posts4, null, null,null,null,null,false, null, null);
+       
+        followRequest.setFollowRequest(false);
+        followRequest.setId((long)10000000);
+        followRequest.setUser(p1000);
+        followRequest.setUserWhichWantToFollow(p1000);
+        followRequestService.save(followRequest);
         
-        Profile pp1 = new Profile((long) 1, u1, posts1, null, null,null,null,null,true, followers1, followings1);
-        Profile pp2 = new Profile((long) 2, u2, posts2, null, null,null,null,null,false, followers2, followings2);
-        Profile pp3 = new Profile((long) 3, u3, posts3, null, null,null,null,null,true, followers3, followings3);
-        Profile pp4 = new Profile((long) 4, u4, posts4, null, null,null,null,null,false, followers4, followings4);
+        fr1.add(followRequest);
+        fr2.add(followRequest);
+        fr3.add(followRequest);
+        fr4.add(followRequest);
+        
+        Profile pp1 = new Profile((long) 1, u1, posts1, fr1, null,null,null,null,true, followers1, followings1);
+        Profile pp2 = new Profile((long) 2, u2, posts2, fr2, null,null,null,null,false, followers2, followings2);
+        Profile pp3 = new Profile((long) 3, u3, posts3, fr3, null,null,null,null,true, followers3, followings3);
+        Profile pp4 = new Profile((long) 4, u4, posts4, fr4, null,null,null,null,false, followers4, followings4);
      
         profileService.save(pp1);
         profileService.save(pp2);

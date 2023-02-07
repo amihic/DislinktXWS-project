@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.DislinktXWSProject.model.FollowRequest;
 import com.example.DislinktXWSProject.model.Profile;
 import com.example.DislinktXWSProject.model.User;
+import com.example.DislinktXWSProject.repository.FollowRequestRepository;
 import com.example.DislinktXWSProject.repository.ProfileRepository;
 
 @Service
@@ -17,7 +18,8 @@ public class ProfileService {
 
 	@Autowired
 	private ProfileRepository profileRepository;
-	
+	@Autowired
+	private FollowRequestRepository followRequestRepository;
 	
 	public Profile findById(Long id) {
 		Optional<Profile> profile = this.profileRepository.findById(id);
@@ -82,7 +84,6 @@ public class ProfileService {
 	}
 	
 	public boolean checkIfFollowing(String username, Long id) {
-		List<Profile> profiles = this.profileRepository.findAll();
 		Profile profileWhoFollows = this.profileRepository.getById(id);
 		Set<Profile> followings = new HashSet<>();
 		followings = profileWhoFollows.getFollowings();
@@ -95,33 +96,43 @@ public class ProfileService {
 		return false;
 	}
 		
-	public void ifPrivateProfile(String username,Long id) {
+	public Profile ifPrivateProfile(String username,Long id) {
+		try {
+		List<Profile> profiles = this.profileRepository.findAll();
 		FollowRequest followRequest = new FollowRequest();
 		Set<FollowRequest> followRequests = new HashSet<>();
 		Profile following = this.profileRepository.getById(id);
+		Profile followed = new Profile();
+		for(Profile p : profiles) {
+			if(p.getUser().getUsername().equals(username)) {
+				followed = p;
+			}
+		}
+		followRequests = followed.getFollowRequests();
+		
+		followRequest.setUsername(followed);
 		followRequest.setId(id);
 		followRequest.setFollowRequest(false);
 		followRequest.setUserWhichWantToFollow(following);
-	
-		List<Profile> profiles = this.profileRepository.findAll();
-		for(Profile p : profiles) {
-			if(p.getUser().getUsername().equals(username)) {
-				followRequests = p.getFollowRequests();
-				followRequest.setUsername(p);
-				
-				if(followRequests.contains(followRequest)) {
-					System.out.println("FollowRequest je vec poslat");
-					break;
-				}
-				
-				followRequests.add(followRequest);
-				p.setFollowRequests(followRequests);
-				System.out.println("FollowRequest smesten u listu follow requestsa");
-				this.profileRepository.save(p);
+		
+		/*for(FollowRequest fr : followRequests) {
+			if(followRequests.contains(followRequest)) {
+				System.out.println("Nije smesten u listu follow requestsa jer ga vec sadrzi");
+				return null;
 			}
-		}
-		System.out.println("Nije smesten u listu follow requestsa");
+		}*/
+		followRequests.add(followRequest);
+		
+		followed.setFollowRequests(followRequests);
+		return this.profileRepository.save(followed);
+		} catch(Exception e) {
+			System.out.println("Exception");
+			return null;
+
+		}	
 	}
+	
+
 
 	public Profile follow(String username, Long id) {
 		List<Profile> profiles = this.profileRepository.findAll();
@@ -139,18 +150,16 @@ public class ProfileService {
 					System.out.println("User " + profileWhoFollows.getUser().getUsername() + " vec prati usera " + p.getUser().getUsername());
 					return null;
 				}
-				if(p.isPrivateProfile()) {
+				/*if(p.isPrivateProfile()) {
 					ifPrivateProfile(username, id);
 					return null;
-				}
+				}*/
 				System.out.println("User " + profileWhoFollows.getUser().getUsername() + " je zapratio usera " + p.getUser().getUsername());
 				
 				addingFollower(username, id);
 				return this.profileRepository.save(profileWhoFollows);
 			}
-		}
-		
-		
+		}				
 		return null;
 	}
 	

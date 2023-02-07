@@ -12,7 +12,7 @@ import lombok.Setter;
 public class FollowRequest {
 	@Id
     private Long id;
-    private Profile username;
+    private Profile user;
     private Profile userWhichWantToFollow;
     private boolean accepted;
 	
@@ -20,10 +20,10 @@ public class FollowRequest {
 
 	}
 
-	public FollowRequest(Long id, Profile username, Profile userWhichWantToFollow, boolean accepted) {
+	public FollowRequest(Long id, Profile user, Profile userWhichWantToFollow, boolean accepted) {
 		super();
 		this.id = id;
-		this.username = username;
+		this.user = user;
 		this.userWhichWantToFollow = userWhichWantToFollow;
 		this.accepted = accepted;
 	}
@@ -36,12 +36,12 @@ public class FollowRequest {
 		this.id = id;
 	}
 
-	public Profile getUsername() {
-		return username;
+	public Profile getUser() {
+		return user;
 	}
 
-	public void setUsername(Profile username) {
-		this.username = username;
+	public void setUser(Profile user) {
+		this.user = user;
 	}
 
 	public Profile getUserWhichWantToFollow() {

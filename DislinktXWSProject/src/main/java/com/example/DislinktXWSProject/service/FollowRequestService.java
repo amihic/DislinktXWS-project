@@ -11,9 +11,8 @@ public class FollowRequestService {
 	@Autowired
 	private FollowRequestRepository followRequestRepository;
 	
-	public FollowRequest save() {		
-		return null;
-		//return this.followRequestRepository.save();
+	public FollowRequest save(FollowRequest followRequest) {		
+		return followRequestRepository.save(followRequest);
 	}
 
 }
