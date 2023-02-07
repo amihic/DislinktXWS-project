@@ -57,31 +57,28 @@
   </head>
   <body>
     <div class="profile-container">
-      <div class="profile-header">IME I PREZIME</div>
+      <div class="profile-header">{{profile.user.username}}</div>
       <div class="profile-info">
-        <div class="info-block">
+        <!--<div class="info-block">
           <div class="info-header">Followers</div>
           <div class="info-count">0</div>
         </div>
         <div class="info-block">
           <div class="info-header">Followings</div>
           <div class="info-count">0</div>
-        </div>
+        </div>-->
       </div>
       <div class="profile-details">
-        <div class="detail">First name:
+        <div class="detail">First name: {{profile.user.firstName}}
             <!--<p>{{user.firstName}}</p>-->
         </div>
-        <div class="detail">Last name:
+        <div class="detail">Last name: {{profile.user.lastName}}
             
         </div>
-        <div class="detail">Email:
+        <div class="detail">Email: {{profile.user.email}}
             
         </div>
-        <div class="detail">Username:
-            
-        </div>
-        <div class="detail">Date of birth:
+        <div class="detail">Date of birth: {{profile.user.dateOfBirth}}
             
         </div>
       </div>

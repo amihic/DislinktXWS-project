@@ -38,7 +38,10 @@ public class PostController {
 	@RequestMapping(value = "api/postsFromUserHeFollows/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Set<Post>> getAllPostsFromUsersHeFollows(@PathVariable Long id){
 		Set<Post> posts = this.postService.findAllPostsFromUsersHeFollows(id);
-		return new ResponseEntity<>(posts, HttpStatus.OK);		
+		if(!posts.isEmpty()) {
+			return new ResponseEntity<>(posts, HttpStatus.OK);		
+		}
+		return new ResponseEntity<>( HttpStatus.NOT_FOUND);
 	}
 	
 	@RequestMapping(value = "api/posts/{username}/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

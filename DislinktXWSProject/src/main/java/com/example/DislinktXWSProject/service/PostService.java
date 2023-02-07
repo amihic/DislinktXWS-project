@@ -130,6 +130,7 @@ public class PostService {
 
 
 	public Set<Post> findAllPostsFromUsersHeFollows(Long id) {
+		try {
 		Set<Post> followingPosts = new HashSet<Post>();
 		Set<Profile> followingProfiles = new HashSet<>();
 		Profile profile = this.profileRepository.getById(id);
@@ -145,6 +146,10 @@ public class PostService {
 			System.out.println("Njegovi pratioci nemaju postove ili ne prati nikoga");
 		}
 		return followingPosts;
+		}catch(Exception e) {
+			System.out.println("exception"+e);
+			return null;
+		}
 	}
 	/*
 	for(Profile prof:followingProfiles) {

@@ -21,12 +21,15 @@ public class ProfileService {
 	@Autowired
 	private FollowRequestRepository followRequestRepository;
 	
-	public Profile findById(Long id) {
-		Optional<Profile> profile = this.profileRepository.findById(id);
-		if(!profile.isPresent()) {
-			return null;
+	public Profile findById(Long id) {		
+		List<Profile> profiles = this.profileRepository.findAll();
+		for(Profile p : profiles) {
+			if(p.getId().equals(id)) {
+				return p;
+			}
 		}
-		return profile.get();
+		return null;
+		
 	}
 	
 	public Profile getByUsername(String username) {
@@ -65,6 +68,7 @@ public class ProfileService {
 	}
 	
 	public Profile addingFollower(String username, Long id) {
+		try {
 		List<Profile> profiles = this.profileRepository.findAll();
 		Profile profileWhoFollows = this.profileRepository.getById(id);
 		Profile profileWhichIsFollowed = new Profile();
@@ -81,6 +85,11 @@ public class ProfileService {
 			}
 		}
 		return this.profileRepository.save(profileWhichIsFollowed);
+		}catch(Exception e) {
+			System.out.println("exception " + e);
+			
+		}
+		return null;
 	}
 	
 	public boolean checkIfFollowing(String username, Long id) {
@@ -126,7 +135,7 @@ public class ProfileService {
 		followed.setFollowRequests(followRequests);
 		return this.profileRepository.save(followed);
 		} catch(Exception e) {
-			System.out.println("Exception");
+			System.out.println("Exception " + e);
 			return null;
 
 		}	
@@ -135,6 +144,7 @@ public class ProfileService {
 
 
 	public Profile follow(String username, Long id) {
+		try {
 		List<Profile> profiles = this.profileRepository.findAll();
 		Profile profileWhoFollows = this.profileRepository.getById(id);
 		Set<Profile> followings = new HashSet<>();
@@ -159,7 +169,11 @@ public class ProfileService {
 				addingFollower(username, id);
 				return this.profileRepository.save(profileWhoFollows);
 			}
-		}				
+		}
+		}catch(Exception e) {
+			System.out.println("exception " + e);
+
+		}
 		return null;
 	}
 	

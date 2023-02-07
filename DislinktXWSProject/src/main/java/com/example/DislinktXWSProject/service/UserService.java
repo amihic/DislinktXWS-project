@@ -1,7 +1,10 @@
 package com.example.DislinktXWSProject.service;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +14,7 @@ import com.example.DislinktXWSProject.model.Post;
 import com.example.DislinktXWSProject.model.Profile;
 import com.example.DislinktXWSProject.model.Role;
 import com.example.DislinktXWSProject.model.User;
+import com.example.DislinktXWSProject.repository.PostRepository;
 import com.example.DislinktXWSProject.repository.ProfileRepository;
 import com.example.DislinktXWSProject.repository.UserRepository;
 
@@ -23,6 +27,9 @@ public class UserService {
 	
 	@Autowired
 	private ProfileRepository profileRepository;
+	
+	@Autowired
+	private PostRepository postRepository;
 	
 	private PasswordEncoder passwordEncoder; 
 	
@@ -72,17 +79,37 @@ public class UserService {
         user.setEnabled(true);
         System.out.println("User " + user.getUsername() + " uspesno registrovan");
         
+        
+        
+        User u = new User((long) 0, "dsadsaadsdas", "$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra", "dadsa", "dsadsa", "dasdsa@gmail.com", "20.08.1999", true, null, "User");
+        this.userRepository.save(u);
+        Post po = new Post((long) 0, u, "dobro dosao", null, null, null, null, (long)  0,(long)  0);
+        this.postRepository.save(po);
+        
+        Set<Profile> followings = new HashSet<>();
+        Set<Profile> followers = new HashSet<>();
+        Set<Post> posts = new HashSet<>();
+        
+        posts.add(po);
+        Profile p = new Profile((long) 0, u, posts, null, null,null,null,null,false, null, null);
+        this.profileRepository.save(p);
+        followings.add(p);
+        followers.add(p);
+        
+        
         Profile userProfile = new Profile();
         userProfile.setId(user.getId());
         userProfile.setUser(user);
-        userProfile.setPosts(null);
+        userProfile.setPosts(posts);
+        userProfile.setFollowings(followings);
+        userProfile.setFollowers(followers);
+        userProfile.setFollowRequests(null);
         userProfile.setExperience(null);
         userProfile.setEducation(null);
         userProfile.setInterests(null);
         userProfile.setSkills(null);
         userProfile.setPrivateProfile(false);
-        userProfile.setFollowers(null);
-        userProfile.setFollowings(null);
+
         
         this.profileRepository.save(userProfile);        
         System.out.println("Useru " + user.getUsername() + " uspesno napravljen profil");

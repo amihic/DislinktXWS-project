@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
+import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     HomeComponent,
     FindComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    EditComponent
     
   ],
   imports: [

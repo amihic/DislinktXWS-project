@@ -26,22 +26,22 @@ public class ProfileController {
 	private ProfileRepository profileRepository;
 	
 	//nadji jedan profil
-	@RequestMapping(value = "api/profile/{id}",method = RequestMethod.GET, produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<Profile> getById(@PathVariable Long id){
+	/*@RequestMapping(value = "api/profile/{id}",method = RequestMethod.GET, produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Profile> getProfileById(@PathVariable Long id){
 		Profile profile = this.profileService.findById(id);
 		return new ResponseEntity<>(profile, HttpStatus.OK);
-	}
+	}*/
 	
 	//nadji sve profile
-	@RequestMapping(value = "api/profiles",method = RequestMethod.GET, produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Profile>> getAll(){
-		List<Profile> profiles = this.profileRepository.findAll();
-		return new ResponseEntity<>(profiles, HttpStatus.OK);
+	@RequestMapping(value = "api/profileId/{id}",method = RequestMethod.GET, produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Profile> getProfile(@PathVariable Long id){
+		Profile profile = this.profileRepository.getById(id);
+		return new ResponseEntity<>(profile, HttpStatus.OK);
 	}
 	
 	
 	//nadji profil po username-u
-	@RequestMapping(value="api/profileN/{username}",method = RequestMethod.GET,produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@RequestMapping(value="api/profile/{username}",method = RequestMethod.GET,produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Profile> getByUsername(@PathVariable String username){
 		Profile profile = this.profileService.getByUsername(username);
 		return new ResponseEntity<>(profile, HttpStatus.OK);
