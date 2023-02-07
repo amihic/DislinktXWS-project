@@ -1,0 +1,26 @@
+button {
+    font-size: 1em;
+    margin: 5px;
+  }
+  
+  .post-input {
+      margin: auto;
+      width: 50%;
+      border: 3px solid #0082e6;
+      padding: 10px;
+    }
+  
+  #ownerId{
+      margin: auto;
+      display: block;
+  }
+  
+  #text{
+      margin: auto;
+      display: block;
+  }
+  
+  #image{
+    margin: auto;
+    display: block;
+  }

@@ -4,6 +4,7 @@ import { EditComponent } from './edit/edit.component';
 import { FindComponent } from './find/find.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PostComponent } from './post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
   {path: 'edit/:id', component: EditComponent},
-  {path: 'edit', component: EditComponent}
+  {path: 'edit', component: EditComponent},
+  {path: 'addPost', component: PostComponent}
 ];
 
 @NgModule({

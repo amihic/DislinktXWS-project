@@ -30,10 +30,10 @@ public class PostController {
 	private PostRepository postRepository;
 	
 	//postavljanje posta
-	@RequestMapping(value="api/post",method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Post> save(@RequestBody Post post){
-		Post newPost = this.postService.save(post);
-		return new ResponseEntity<>(newPost, HttpStatus.CREATED);
+	@PutMapping(value="api/addPost/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Profile> save(@PathVariable Long id, @RequestBody Post post){
+		Profile profil = this.postService.save(id, post);
+		return new ResponseEntity<>(profil, HttpStatus.OK);
 	}
 	
 	//prikaz svih postova

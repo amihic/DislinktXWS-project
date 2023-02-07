@@ -9,16 +9,20 @@ import { Post } from '../model/post';
 })
 export class PostService {
   url="http://localhost:8090/api/postsFromUserHeFollows";
-
-  constructor(private http:HttpClient) {}
+  url1 = "http://localhost:8090/api/addPost";
+  myId:any;
+  constructor(private http:HttpClient) {
+    this.myId= Number(sessionStorage.getItem('id'));
+  }
 
   getPosts(id:Number):Observable<Post[]>{
     return this.http.get<Post[]>(`${this.url}/${id}`);
   }
   
-  /*save(newPost:Post):Observable<Post>{
-    return this.http.post<Post>(this.url,newPost);
+  addPost(postToAdd:Post):Observable<Post>{
+    return this.http.put<Post>(`${this.url1}/${this.myId}`,postToAdd);
   }
+  /*
   findPostById(id:number):Observable<Post>{
     return this.http.get<Post>(`${this.url}/${id}`);
   }*/

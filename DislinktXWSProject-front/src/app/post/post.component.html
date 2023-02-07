@@ -1,0 +1,70 @@
+<!--<div class = "post-input">
+    <form >
+
+        <label >Text:</label>
+        <input id="text" type="text" [(ngModel)]="postToAdd.text"><br/>
+        
+        <label>Picture:</label>
+          <input id="image" type="text" [(ngModel)]="postToAdd.picture">
+          
+          
+        <button class="btn btn-success" (click)="addPost(postToAdd)">Post</button>
+    </form>-->
+
+    <!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Add CSS styles here */
+      .container {
+        width: 60%;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        padding: 20px;
+        background-color: lightgray;
+        border-radius: 10px;
+      }
+      input[type="text"], input[type="email"], textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        border: 1px solid gray;
+      }
+      input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        margin-top: 20px;
+        background-color: blue;
+        color: white;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: darkblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Add Post</h1>
+        <form>
+          
+              
+          <input type="text" placeholder="Text" [(ngModel)]="postToAdd.text" [ngModelOptions]="{standalone: true}" required>
+          <input type="text" placeholder="Picture" [(ngModel)]="postToAdd.picture" [ngModelOptions]="{standalone: true}" required>
+          
+          
+  
+          <input type="submit" (click)="addPost(postToAdd)" value="Post">
+        </form>
+      </div>
+      </body>
+      </html>

@@ -25,17 +25,32 @@ public class PostService {
 	@Autowired
 	private ProfileRepository profileRepository;
 	
-	public Post save(Post post) {
-		List<Post> posts = this.postRepository.findAll();
-		Long id = (long) 0;
+	public Profile save(Long id, Post post) {
+		/*List<Post> posts = this.postRepository.findAll();
+		Long Id = (long) 0;
 		
 		for(Post p:posts) {
-			id = p.getId();
+			Id = p.getId();
 		}
-		id = id+1;
-		post.setId(id);
+		Id = Id+1;
+		post.setId(Id);*/
 		
-		return this.postRepository.save(post);
+		Profile profil = new Profile();
+		Set<Post> postovi = new HashSet<>();
+		List<Profile> profiles = this.profileRepository.findAll();
+		for(Profile p : profiles) {
+			if(p.getUser().getId().equals(id)){
+				postovi = p.getPosts();
+				profil=p;
+			}
+		}
+		post.setId(id);
+		post.setOwner(profil.getUser());
+		postovi.add(post);
+		profil.setPosts(postovi);
+		System.out.println("ja sam "+id + " a vlasnik posta je " + profil.getUser().getId());
+		System.out.println("User " + profil.getUser().getUsername() + " je dodao post");
+		return this.profileRepository.save(profil);
 	}
 	
 	
