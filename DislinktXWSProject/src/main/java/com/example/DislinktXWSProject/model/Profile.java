@@ -24,10 +24,10 @@ public class Profile {
     private User user;
     private Set<Post> posts;
     private Set<FollowRequest> followRequests;
-    private List<String> experience;
-    private List<String> education;
-    private List<String> interests;
-    private List<String> skills;
+    private String experiences;
+    private String education;
+    private String interests;
+    private String skills;
     private boolean privateProfile;
     private Set<Profile> followers;
     private Set<Profile> followings;
@@ -36,13 +36,13 @@ public class Profile {
 
 	}
     
-	public Profile(Long id, User user, Set<Post> posts, Set<FollowRequest> followRequests, List<String> experience, List<String> education, List<String> interests, List<String> skills, boolean privateProfile, Set<Profile> followers, Set<Profile> followings) {
+	public Profile(Long id, User user, Set<Post> posts, Set<FollowRequest> followRequests, String experiences, String education, String interests, String skills, boolean privateProfile, Set<Profile> followers, Set<Profile> followings) {
 		
 		this.id = id;
 		this.user = user;
 		this.posts = posts;
 		this.followRequests = followRequests;
-		this.experience = experience;
+		this.experiences = experiences;
 		this.education = education;
 		this.interests = interests;
 		this.skills = skills;
@@ -81,28 +81,28 @@ public class Profile {
 		this.followRequests = followRequests;
 	}
 
-	public List<String> getExperience() {
-		return experience;
+	public String getExperience() {
+		return experiences;
 	}
-	public void setExperience(List<String> experience) {
-		this.experience = experience;
+	public void setExperience(String experiences) {
+		this.experiences = experiences;
 	}
-	public List<String> getEducation() {
+	public String getEducation() {
 		return education;
 	}
-	public void setEducation(List<String> education) {
+	public void setEducation(String education) {
 		this.education = education;
 	}
-	public List<String> getInterests() {
+	public String getInterests() {
 		return interests;
 	}
-	public void setInterests(List<String> interests) {
+	public void setInterests(String interests) {
 		this.interests = interests;
 	}
-	public List<String> getSkills() {
+	public String getSkills() {
 		return skills;
 	}
-	public void setSkills(List<String> skills) {
+	public void setSkills(String skills) {
 		this.skills = skills;
 	}
 	public boolean isPrivateProfile() {

@@ -8,12 +8,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.DislinktXWSProject.model.Post;
+import com.example.DislinktXWSProject.model.Profile;
 import com.example.DislinktXWSProject.repository.PostRepository;
 import com.example.DislinktXWSProject.service.PostService;
 
@@ -68,6 +70,8 @@ public class PostController {
 		this.postRepository.delete(post);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	
 	
 	
 }

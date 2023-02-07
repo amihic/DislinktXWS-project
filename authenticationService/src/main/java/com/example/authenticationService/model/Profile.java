@@ -21,7 +21,7 @@ public class Profile {
     private User user;
     private Set<Post> posts;
     private Set<FollowRequest> followRequests;
-    private List<String> experience;
+    private Set<String> experiences;
     private List<String> education;
     private List<String> interests;
     private List<String> skills;
@@ -34,14 +34,14 @@ public class Profile {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Profile(Long id, User user, Set<Post> posts, Set<FollowRequest> followRequests, List<String> experience, List<String> education, List<String> interests,
+	public Profile(Long id, User user, Set<Post> posts, Set<FollowRequest> followRequests, Set<String> experiences, List<String> education, List<String> interests,
 			List<String> skills, boolean privateProfile, Set<Profile> followers, Set<Profile> followings) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.posts = posts;
 		this.followRequests = followRequests;
-		this.experience = experience;
+		this.experiences = experiences;
 		this.education = education;
 		this.interests = interests;
 		this.skills = skills;
@@ -82,12 +82,12 @@ public class Profile {
 		this.followRequests = followRequests;
 	}
 
-	public List<String> getExperience() {
-		return experience;
+	public Set<String> getExperience() {
+		return experiences;
 	}
 
-	public void setExperience(List<String> experience) {
-		this.experience = experience;
+	public void setExperience(Set<String> experiences) {
+		this.experiences = experiences;
 	}
 
 	public List<String> getEducation() {

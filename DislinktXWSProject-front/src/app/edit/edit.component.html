@@ -43,10 +43,21 @@
     <div class="container">
       <h1>Edit Profile</h1>
       <form>
-        <input type="text" placeholder="Name" required>
-        <input type="email" placeholder="Email" required>
-        <textarea placeholder="Bio"></textarea>
-        <input type="submit" value="Save">
+        <label><b>Privatan profil: </b></label>
+            <input type="radio" value="true" [(ngModel)]="profile.privateProfile"  name="q5"> DA
+            <input type="radio" value="false" [(ngModel)]="profile.privateProfile" name="q5" [ngModelOptions]="{standalone: true}"> NE
+        <input type="text" placeholder="First name" [(ngModel)]="profile.user.firstName" [ngModelOptions]="{standalone: true}" required>
+        <input type="email" placeholder="Last name" [(ngModel)]="profile.user.lastName" [ngModelOptions]="{standalone: true}" required>
+        <input type="email" placeholder="Email" [(ngModel)]="profile.user.email" [ngModelOptions]="{standalone: true}" required>
+        <input type="email" placeholder="Username" [(ngModel)]="profile.user.username" [ngModelOptions]="{standalone: true}" required>
+        <input type="email" placeholder="Date of birth" [(ngModel)]="profile.user.dateOfBirth" [ngModelOptions]="{standalone: true}" required>
+        <input type="email" placeholder="Education" [(ngModel)]="profile.education" [ngModelOptions]="{standalone: true}" required>
+        <input type="email" placeholder="Skills" [(ngModel)]="profile.skills" [ngModelOptions]="{standalone: true}" required>
+        <input type="email" placeholder="Interests" [(ngModel)]="profile.interests" [ngModelOptions]="{standalone: true}" required>
+        <input type="email" placeholder="Experience" [(ngModel)]="profile.experiences" [ngModelOptions]="{standalone: true}" required>
+        
+
+        <input type="submit" (click)="update(profile)" value="Update">
       </form>
     </div>
   </body>

@@ -11,7 +11,9 @@ import { Profile } from '../model/profile';
 export class ProfileService {
   url = "http://localhost:8090/api/follow";
   url1 = "http://localhost:8090/api/profileId";
+  url2 = "http://localhost:8090/api/profileEdit";
   myId:any;
+
   constructor(private http:HttpClient) {
     this.myId= Number(sessionStorage.getItem('id'));
   }
@@ -25,5 +27,9 @@ export class ProfileService {
     return this.http.get<Profile>(`${this.url1}/${this.myId}`)
   }
   
+  update(profile:Profile)
+  {
+    return this.http.put<Profile>(`${this.url2}/` + `${this.myId}`, profile);
+  }
 
 }

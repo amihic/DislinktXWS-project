@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.DislinktXWSProject.model.Post;
 import com.example.DislinktXWSProject.model.Profile;
 import com.example.DislinktXWSProject.repository.ProfileRepository;
 import com.example.DislinktXWSProject.service.ProfileService;
@@ -75,10 +77,10 @@ public class ProfileController {
 	}
 	
 	//update profila
-	@PutMapping(value = "api/profile")
+	@PutMapping(value="api/profileEdit/{id}")
 	public ResponseEntity<Profile> update(@RequestBody Profile profile){
 		Profile updatedProfile = this.profileService.update(profile);
 		return new ResponseEntity<>(updatedProfile, HttpStatus.OK);
-	}
+	}	
 	
 }

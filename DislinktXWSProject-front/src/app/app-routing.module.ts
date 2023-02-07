@@ -15,7 +15,8 @@ const routes: Routes = [
   {path: 'find', component: FindComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'edit/:username', component: EditComponent}
+  {path: 'edit/:id', component: EditComponent},
+  {path: 'edit', component: EditComponent}
 ];
 
 @NgModule({

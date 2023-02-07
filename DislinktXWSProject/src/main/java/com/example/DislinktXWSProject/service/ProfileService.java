@@ -12,6 +12,7 @@ import com.example.DislinktXWSProject.model.Profile;
 import com.example.DislinktXWSProject.model.User;
 import com.example.DislinktXWSProject.repository.FollowRequestRepository;
 import com.example.DislinktXWSProject.repository.ProfileRepository;
+import com.example.DislinktXWSProject.repository.UserRepository;
 
 @Service
 public class ProfileService {
@@ -19,7 +20,7 @@ public class ProfileService {
 	@Autowired
 	private ProfileRepository profileRepository;
 	@Autowired
-	private FollowRequestRepository followRequestRepository;
+	private UserRepository userRepository;
 	
 	public Profile findById(Long id) {		
 		List<Profile> profiles = this.profileRepository.findAll();
@@ -54,17 +55,34 @@ public class ProfileService {
 	}
 	
 	public Profile update(Profile profile) {
-		Profile updatedProfile = this.profileRepository.getById(profile.getId());
+		Profile updatedProfile = new Profile();
+		List<Profile> profiles = this.profileRepository.findAll();
+		for(Profile p : profiles) {
+			if(p.getUser().getUsername().equals(profile.getUser().getUsername())) {
+				updatedProfile = p;
+			}
+		}
+		//Profile updatedProfile = this.profileRepository.getByUser(profile.getUser());
+		User user = new User();
+		user.setId(updatedProfile.getId());
+		user.setEmail(profile.getUser().getEmail());
+		user.setFirstName(profile.getUser().getFirstName());
+		user.setLastName(profile.getUser().getLastName());
+		user.setUsername(profile.getUser().getUsername());
+		user.setDateOfBirth(profile.getUser().getDateOfBirth());
+		System.out.println("Profil " + profile.getUser().getFirstName() + " " + profile.getUser().getDateOfBirth());
+		this.userRepository.save(user);
+		updatedProfile.setUser(user);
 		
-		updatedProfile.setUser(profile.getUser());
 		updatedProfile.setSkills(profile.getSkills());
 		updatedProfile.setPrivateProfile(profile.isPrivateProfile());
-		updatedProfile.setInterests(profile.getInterests());
-		updatedProfile.setFollowers(profile.getFollowers());
 		updatedProfile.setExperience(profile.getExperience());
 		updatedProfile.setEducation(profile.getEducation());
-		
-		return this.profileRepository.save(updatedProfile);
+		updatedProfile.setInterests(profile.getInterests());
+		Profile uredjen = new Profile();
+		uredjen = updatedProfile;
+		System.out.println("Profil " + updatedProfile.getUser().getUsername() + " uspesno updateovan " +updatedProfile.getUser().getDateOfBirth() );
+		return this.profileRepository.save(uredjen);
 	}
 	
 	public Profile addingFollower(String username, Long id) {
