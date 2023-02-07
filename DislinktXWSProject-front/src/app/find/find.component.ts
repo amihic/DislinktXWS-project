@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Post } from '../model/post';
 import { Profile } from '../model/profile';
 import { User } from '../model/user';
+import { ProfileService } from '../service/profile.service';
 import { UserService } from '../service/user.service';
 
 @Component({
@@ -17,7 +19,9 @@ export class FindComponent implements OnInit {
   posts:Post[];
   user:User;
   userName:String;
-  constructor(private userService: UserService) {
+  profile:Profile;
+  
+  constructor(private userService: UserService, private profileService: ProfileService) {
     this.users=[];
     this.posts=[];
     this.userName = "";
@@ -33,6 +37,32 @@ export class FindComponent implements OnInit {
           firstName:"",
           lastName: "",
           dateOfBirth: ""
+
+        }
+      );
+      this.profile = new Profile
+      (
+        {
+          id: 0,
+          user: {
+            id: 0,
+            email: "",
+            username: "",
+            password:"",
+            firstName:"",
+            lastName: "",
+            dateOfBirth: ""
+  
+          },
+          posts:[],
+          followRequests:[],
+          experience:[],
+          education:[],
+          interests:[],
+          skills:[],
+          privateProfile: false,
+          followers:[],
+          followings:[],
 
         }
       );
@@ -57,8 +87,10 @@ export class FindComponent implements OnInit {
     
   }
 
-  followRequest(){
-    this.myId = Number(sessionStorage.getItem('id'));
+  followRequest(username:String){
+    this.profileService.follow(username)
+    .subscribe((res: Profile) => this.profile=res);
+    
   }
 
 }

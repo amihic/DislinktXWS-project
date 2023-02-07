@@ -1,9 +1,12 @@
+import { FollowRequest } from "./followRequest";
 import { Post } from "./post";
 import { User } from "./user";
 
 interface ProfileInterface{
     id?:number;
     user: User;
+    posts:Post[];
+    followRequests:FollowRequest[];
     experience:string[];
     education:string[];
     interests:string[];
@@ -16,6 +19,8 @@ interface ProfileInterface{
 export class Profile implements ProfileInterface{
     id?:number;
     user: User;
+    posts:Post[];
+    followRequests:FollowRequest[];
     experience:string[];
     education:string[];
     interests:string[];
@@ -27,6 +32,8 @@ export class Profile implements ProfileInterface{
     constructor(obj:ProfileInterface){
         this.id=obj.id;
         this.user=obj.user;
+        this.posts=obj.posts;
+        this.followRequests=obj.followRequests;
         this.experience=obj.experience;
         this.education=obj.education;
         this.interests=obj.interests;
